@@ -1,22 +1,24 @@
-# CS-004 - Monitoring & Logging
+# CS-004 - Monitoring and Logging
 
 ## Goal
 
-Set up monitoring and logging to track activity and improve security.
+Monitor AWS account activity and track management events.
 
 ## What I did
 
-- Enabled AWS CloudTrail.
-- Configured CloudTrail to record account activity.
-- Reviewed the event history.
-- Verified that AWS management actions are being logged.
+- Opened AWS CloudTrail.
+- Reviewed the Event History.
+- Verified that management events are being recorded.
+- Checked recent activities performed in my AWS account.
 
 ## Verification
 
-- CloudTrail is enabled.
-- Events such as login activity and AWS resource changes are recorded.
-- Event history is available for review.
+I verified that CloudTrail recorded events such as:
+- ConsoleLogin
+- SendSSHPublicKey
+- OpenTunnel
+- TerminateInstances
 
 ## Result
 
-AWS account activity is monitored, making it easier to investigate changes and identify suspicious actions.
+CloudTrail is successfully recording AWS account activity, allowing me to review administrative actions and investigate changes when needed.
