@@ -2,144 +2,103 @@
 
 ## Project Overview
 
-This project is my hands-on cloud security learning journey focused on AWS. The goal is to understand how secure cloud environments are designed, deployed, and hardened using real-world security practices instead of simply launching cloud resources.
+This project is a hands-on AWS cloud security project that I built to gain practical experience with infrastructure security and cloud hardening.
 
-Throughout this project, I will build a secure AWS infrastructure from the ground up while documenting every step, the reasoning behind each configuration, the security risks involved, and the lessons learned.
+Instead of only learning AWS services, I focused on understanding how cloud environments are secured in real-world scenarios by building, configuring, testing, and validating security controls.
 
-The project is designed to simulate the work of a Cloud Security Engineer by focusing on infrastructure security, access management, monitoring, threat detection, hardening, and continuous security improvement.
+Throughout this project, I encountered real configuration issues, investigated the root cause, applied the appropriate remediation, and verified that each solution worked before documenting it.
 
----
-
-## Project Goals
-
-- Learn AWS cloud security through practical implementation.
-- Design secure network architectures.
-- Protect cloud infrastructure using security best practices.
-- Document security decisions and lessons learned.
-- Build a professional portfolio demonstrating cloud security skills.
+The goal of this project was not simply to deploy AWS resources, but to build a secure environment using cloud security best practices.
 
 ---
 
-## What I Have Completed
+## Technologies Used
 
-### AWS Environment Setup
+- Amazon EC2
+- Amazon VPC
+- Security Groups
+- EC2 Instance Connect Endpoint
+- AWS CloudTrail
+- Amazon Linux 2023
+- SSH
+- GitHub
 
-- Created an AWS environment for the project.
-- Configured the initial infrastructure required for security testing.
-- Organized the environment for future security implementations.
+---
 
-### Secure Network Design
+## What I Built
 
-Built a network architecture that separates public and private resources.
+I designed a secure AWS environment that includes:
 
-Current architecture includes:
-
+- Enterprise VPC
 - Public Subnet
 - Private Subnet
 - Bastion Host
 - Private Application Server
 - Security Groups
 - EC2 Instance Connect Endpoint
+- CloudTrail Monitoring
 
-### Bastion Host
-
-Configured a Bastion Host inside the public subnet to act as the secure administrative entry point.
-
-Purpose:
-
-- Avoid exposing private servers directly to the internet.
-- Allow controlled administrative access.
-- Reduce the attack surface.
-
-### Private Application Server
-
-Created an application server inside a private subnet.
-
-Security benefits:
-
-- No public IP address.
-- Accessible only through secure internal connections.
-- Protected from direct internet access.
-
-### Security Groups
-
-Configured Security Groups to control network traffic.
-
-Implemented:
-
-- SSH access using Port 22
-- Restricted inbound rules
-- Controlled communication between resources
-
-### Secure Instance Access
-
-Configured EC2 Instance Connect Endpoint to securely access the private instance without exposing it to the public internet.
-
-Successfully connected to:
-
-- Bastion Host
-- Private Application Server
-
-Verified secure access using Linux commands such as:
-
-```
-whoami
-```
+The environment follows a layered security approach where administrative access is controlled while the application server remains isolated from direct internet access.
 
 ---
 
-## Skills Practiced
+## Security Work Performed
 
-- AWS EC2
-- Amazon VPC
-- Public and Private Subnets
-- Bastion Host Architecture
-- Security Groups
-- EC2 Instance Connect Endpoint
-- Secure SSH Access
+During this project I:
+
+- Built a segmented VPC using public and private subnets.
+- Configured a Bastion Host for secure administrative access.
+- Deployed an application server without a public IP address.
+- Configured Security Groups using the principle of least privilege.
+- Hardened SSH by disabling root login and password authentication.
+- Verified secure access using EC2 Instance Connect.
+- Reviewed CloudTrail event history to validate AWS management activity.
+- Investigated and resolved networking issues during deployment.
+- Validated every security configuration after implementation.
+
+---
+
+## Security Cases
+
+This repository documents the security tasks completed during the project.
+
+### CS-001 — Bastion VPC Remediation
+
+Identified and resolved a Bastion Host deployment in the wrong VPC. Rebuilt the infrastructure in the correct VPC and verified secure connectivity.
+
+### CS-002 — SSH Hardening
+
+Reviewed and secured the SSH configuration by disabling root login and password authentication while keeping secure key-based authentication enabled.
+
+### CS-003 — Private Application Access Control
+
+Configured Security Groups to ensure the private application server accepts SSH connections only from the Bastion Host.
+
+### CS-004 — Monitoring and Logging
+
+Verified AWS CloudTrail management events and confirmed AWS account activity was successfully recorded for monitoring and auditing.
+
+---
+
+## Skills Demonstrated
+
+- AWS Infrastructure Security
+- VPC Design
+- Network Segmentation
+- SSH Hardening
+- Security Group Management
+- CloudTrail Monitoring
 - Linux Administration
-- Cloud Infrastructure Hardening
+- Troubleshooting
+- Security Validation
+- Cloud Security Best Practices
 
 ---
 
-## Project Structure
+## Project Outcome
 
-```
-README.md
+This project helped me understand how cloud security is applied beyond simply deploying AWS resources.
 
-environment/
-    initial-setup/
-    security/
+I gained practical experience building a secure environment, troubleshooting security issues, validating configurations, and documenting the work performed.
 
-security-cases/
-
-security-procedures/
-
-security-improvements/
-```
-
----
-
-## Upcoming Work
-
-The next stages of this project will include:
-
-- Infrastructure hardening
-- IAM security best practices
-- Logging and monitoring
-- Threat detection
-- Incident response
-- Security assessments
-- Continuous security improvements
-- Security case studies
-- Documentation of findings and remediation
-
----
-
-## Key Learning
-
-This project is helping me understand not only how AWS services work but also why security controls are implemented. Every configuration is documented with its purpose, security impact, and real-world use case to build practical cloud security experience.
-
----
-
-**Status:** In Progress
+Each security case included investigation, implementation, verification, and final validation to ensure the environment was functioning as expected.
