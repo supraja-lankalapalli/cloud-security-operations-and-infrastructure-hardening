@@ -1,24 +1,38 @@
-# CS-003 - Private App Access Control
+# CS-003 - Private Application Access Control
 
-## Goal
+## Objective
 
-Allow access to the private application server only through the Bastion Host.
+Protect the application server by ensuring it is accessible only through trusted administrative resources.
 
-## What I did
+## Problem
 
-- Created a Bastion Host Security Group.
-- Allowed SSH (Port 22) to the Bastion Host only from my public IP address.
-- Configured the Private App Security Group.
-- Allowed SSH (Port 22) only from the Bastion Host Security Group.
-- Verified that the application server does not have a public IP address.
-- Verified that direct internet access to the private server is blocked.
+The application server was designed to remain private, so I needed to verify that administrative access was restricted and that the server was not exposed to the internet.
 
-## Verification
+## Environment
 
-- Bastion Host has a public IP.
-- Private Application Server has only a private IP.
-- SSH access to the private server is allowed only through the Bastion Host.
+- AWS EC2
+- Security Groups
+- Amazon VPC
+
+## What I Did
+
+- Reviewed the Bastion Host Security Group.
+- Reviewed the Private Application Security Group.
+- Verified that SSH access to the Bastion Host was restricted.
+- Configured the Private Application Security Group to accept SSH only from the Bastion Host Security Group.
+- Verified that the application server did not have a public IP address.
+- Confirmed that direct internet access was blocked.
+
+## Security Improvements
+
+- Restricted administrative access using Security Groups.
+- Protected the application server from direct internet exposure.
+- Applied the principle of least privilege for network access.
 
 ## Result
 
-The application server remains isolated in the private subnet and can only be accessed securely through the Bastion Host.
+The private application server can now be accessed only through the trusted Bastion Host, significantly reducing the attack surface.
+
+## Status
+
+Completed
