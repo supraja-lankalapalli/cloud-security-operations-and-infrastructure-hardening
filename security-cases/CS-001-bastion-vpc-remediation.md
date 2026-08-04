@@ -1,85 +1,39 @@
-# CS-001: Bastion Host and Private VPC Remediation
+# CS-001 - Bastion VPC Remediation
 
 ## Objective
 
-The goal of this security case was to securely access an EC2 instance running in a private subnet without exposing it directly to the internet.
-
----
+Build a secure network architecture that allows administrative access to a private EC2 instance without exposing it directly to the internet.
 
 ## Problem
 
-I deployed an application server inside a private subnet. Since the instance did not have a public IP address, I could not connect to it directly using EC2 Instance Connect.
-
-This is a common security design because private instances should not be publicly accessible.
-
----
+While configuring the environment, I discovered that the Bastion Host and the Application Server were deployed in different VPCs. Because of this, the security groups could not communicate, preventing secure SSH access to the private instance.
 
 ## Environment
 
 - AWS EC2
-- Amazon Linux 2023
-- Enterprise VPC
-- Public Subnet
-- Private Subnet
-- Bastion Host
-- EC2 Instance Connect Endpoint
+- Amazon VPC
 - Security Groups
-
----
+- Amazon Linux 2023
 
 ## What I Did
 
-### Step 1 - Verified the Environment
-
-I confirmed that the application server was running inside a private subnet while the Bastion Host was deployed in the public subnet.
-
----
-
-### Step 2 - Configured Secure Access
-
-To securely access the private instance, I created an EC2 Instance Connect Endpoint inside the VPC.
-
-This allowed secure browser-based SSH access without assigning a public IP address to the application server.
-
----
-
-### Step 3 - Updated Security Groups
-
-I reviewed the security group rules and allowed SSH (TCP Port 22) only from the Bastion Host security group.
-
-This follows the principle of least privilege by allowing only trusted resources to connect.
-
----
-
-### Step 4 - Connected to the Private Instance
-
-After creating the EC2 Instance Connect Endpoint, I successfully connected to the private EC2 instance.
-
-I verified the connection by running:
-
-```bash
-whoami
-```
-
-The command returned:
-
-```bash
-ec2-user
-```
-
-This confirmed that secure access to the private instance was working successfully.
-
----
+- Reviewed the network configuration.
+- Verified the VPC associated with both EC2 instances.
+- Identified that the Bastion Host was deployed in the wrong VPC.
+- Created a new Bastion Host in the correct Enterprise VPC.
+- Configured the required Security Groups.
+- Verified secure connectivity between the Bastion Host and the private Application Server.
+- Removed the incorrectly deployed Bastion Host after validation.
 
 ## Security Improvements
 
-- Kept the application server inside a private subnet.
-- Avoided assigning a public IP address.
-- Used a Bastion Host for administrative access.
-- Used an EC2 Instance Connect Endpoint for secure connectivity.
-- Restricted SSH access using security groups.
+- Maintained network segmentation using public and private subnets.
+- Ensured administrative access was provided through a dedicated Bastion Host.
+- Prevented direct internet access to the private application server.
 
----
+## Result
+
+The infrastructure now follows a secure network architecture where administrative access is controlled while the application server remains isolated inside the private subnet.
 
 ## Status
 
