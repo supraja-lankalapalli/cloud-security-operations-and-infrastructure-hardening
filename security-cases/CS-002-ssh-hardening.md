@@ -1,25 +1,41 @@
 # CS-002 - SSH Hardening
 
-## Goal
+## Objective
 
-Secure SSH access to the EC2 instances.
+Strengthen SSH security by reducing unnecessary authentication methods and protecting administrative access.
 
-## What I did
+## Problem
 
-- Connected to the Bastion Host using EC2 Instance Connect.
-- Checked the SSH configuration.
-- Verified that root login is disabled.
-- Verified that password authentication is disabled.
-- Verified that public key authentication is enabled.
+The default SSH configuration still allowed root login using SSH keys. Although password authentication was disabled, additional hardening was required to follow security best practices.
 
-## Verification
+## Environment
 
-I confirmed the following settings:
+- Amazon Linux 2023
+- AWS EC2
+- SSH
 
-- PermitRootLogin no
-- PasswordAuthentication no
-- PubkeyAuthentication yes
+## What I Did
+
+- Connected to the EC2 instance using EC2 Instance Connect.
+- Reviewed the SSH configuration.
+- Disabled direct root login.
+- Verified that password authentication remained disabled.
+- Verified that only public key authentication was enabled.
+- Validated the SSH configuration.
+- Reloaded the SSH service.
+- Opened a second session to confirm the server remained accessible.
+
+## Security Improvements
+
+- Disabled root SSH login.
+- Disabled password-based authentication.
+- Allowed only key-based authentication.
+- Verified secure access after applying the changes.
 
 ## Result
 
-SSH access is secured using key-based authentication only. Root login and password authentication are disabled to reduce unauthorized access.
+The SSH service now follows a more secure configuration while maintaining reliable administrative access.
+
+## Status
+
+Completed
